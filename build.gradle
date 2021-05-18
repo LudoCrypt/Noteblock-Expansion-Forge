@@ -148,7 +148,6 @@ shadowJar {
     classifier = ''
 	exclude 'com/chocohead/mm/MM.class'
     configurations = [project.configurations.shade]
-    relocate 'com.chocohead.mm', "shadow.com.chocohead.mm"
 }
 
 reobf {
