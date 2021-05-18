@@ -139,7 +139,7 @@ jar {
     manifest {
         attributes([
                 // Existing properties here
-                "MixinConfigs": "mixins.nbexpand.json"
+                "MixinConfigs": "mixins.nbexpand.json,mixins.mm.json"
         ])
     }
 }
