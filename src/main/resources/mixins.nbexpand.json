@@ -2,6 +2,7 @@
 	"minVersion": "0.8",
 	"required": true,
 	"package": "net.ludocrypt.nbexpand.mixin",
+	"refmap": "refmap.nbexpand.json",
 	"compatibilityLevel": "JAVA_8",
 	"mixins": [
 		"InstrumentMixin"
