@@ -1,0 +1,77 @@
+{
+	"noteblock.new.note.sitar": {
+		"sounds": [
+			"nbexpand:noteblock/new/note/sitar"
+		]
+	},
+	"noteblock.new.note.music_box": {
+		"sounds": [
+			"nbexpand:noteblock/new/note/music_box"
+		]
+	},
+	"noteblock.new.note.piano": {
+		"sounds": [
+			"nbexpand:noteblock/new/note/piano"
+		]
+	},
+	"noteblock.new.note.vibraphone": {
+		"sounds": [
+			"nbexpand:noteblock/new/note/vibraphone"
+		]
+	},
+	"noteblock.new.note.bassdrum": {
+		"sounds": [
+			"nbexpand:noteblock/new/note/bass_drum"
+		]
+	},
+	"noteblock.new.note.celesta": {
+		"sounds": [
+			"nbexpand:noteblock/new/note/celesta"
+		]
+	},
+	"noteblock.new.note.glockenspiel": {
+		"sounds": [
+			"nbexpand:noteblock/new/note/glockenspiel"
+		]
+	},
+	"noteblock.new.note.harpsichord": {
+		"sounds": [
+			"nbexpand:noteblock/new/note/harpsichord"
+		]
+	},
+	"noteblock.new.note.highdrum": {
+		"sounds": [
+			"nbexpand:noteblock/new/note/high_drum"
+		]
+	},
+	"noteblock.new.note.marimba": {
+		"sounds": [
+			"nbexpand:noteblock/new/note/marimba"
+		]
+	},
+	"noteblock.new.note.steeldrums": {
+		"sounds": [
+			"nbexpand:noteblock/new/note/steel_drums"
+		]
+	},
+	"noteblock.new.note.timpani": {
+		"sounds": [
+			"nbexpand:noteblock/new/note/timpani"
+		]
+	},
+	"noteblock.new.note.woodblocks": {
+		"sounds": [
+			"nbexpand:noteblock/new/note/woodblocks"
+		]
+	},
+	"noteblock.new.note.chinese_pik": {
+		"sounds": [
+			"nbexpand:noteblock/new/note/chinese_pik"
+		]
+	},
+	"noteblock.new.note.pluck": {
+		"sounds": [
+			"nbexpand:noteblock/new/note/pluck"
+		]
+	}
+}

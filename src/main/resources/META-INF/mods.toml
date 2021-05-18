@@ -1,0 +1,28 @@
+modLoader="javafml"
+loaderVersion="[32,)"
+license="LGPLv3"
+issueTrackerURL="https://github.com/ludocrypt/Noteblock-Expansion-Forge/issues"
+[[mods]]
+modId="nbexpand"
+version="${file.jarVersion}"
+displayName="Noteblock Expansion"
+displayURL="https://discord.gg/bbhS2vy"
+logoFile="nbexpand.png"
+credits="LudoCrypt"
+authors="LudoCrypt"
+description='''
+Adds more Noteblock Instruments!
+'''
+
+[[dependencies.nbexpand]]
+modId="forge"
+mandatory=true
+versionRange="[32,)"
+ordering="NONE"
+side="BOTH"
+[[dependencies.nbexpand]]
+modId="minecraft"
+mandatory = true
+versionRange = "[1.16.2,1.17)"
+ordering = "NONE"
+side="BOTH"
