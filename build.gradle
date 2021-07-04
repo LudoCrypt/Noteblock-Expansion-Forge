@@ -3,44 +3,39 @@ buildscript {
         maven { url = 'https://files.minecraftforge.net/maven' }
         jcenter()
         mavenCentral()
-        maven { url 'https://repo.spongepowered.org/repository/maven-public/' }
-        maven { url "https://plugins.gradle.org/m2/" }
+		maven { url = 'https://dist.creeper.host/Sponge/maven' }
+        maven {url='https://dist.creeper.host/Sponge/maven'}
+		maven { url 'https://jitpack.io' }
     }
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '3.+', changing: true
-        classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
-        classpath "com.wynprice.cursemaven:CurseMaven:2.1.4"
+        classpath 'com.github.SpongePowered:MixinGradle:0.7-SNAPSHOT'
     }
 }
-
-plugins {
-    id 'com.github.johnrengelman.shadow' version '4.0.4'
-}
-
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-apply plugin: 'com.github.johnrengelman.shadow'
-apply plugin: 'java'
-
-version = '1.0'
+version = '1.1.0'
 group = 'net.ludocrypt.nbexpand'
 archivesBaseName = 'nbexpand'
 
-sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
+sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 
-println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
 minecraft {
     mappings channel: 'snapshot', version: '20201028-1.16.3'
+
+    accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
     runs {
         client {
             workingDirectory project.file('run')
-            arg "-mixin.config=mixins.nbexpand.json"
+            arg "-mixin.config=nbexpand.mixins.json"
+
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+
             property 'forge.logging.console.level', 'debug'
-            property 'mixin.env.disableRefMap', 'true'
+
             mods {
                 nbexpand {
                     source sourceSets.main
@@ -50,10 +45,12 @@ minecraft {
 
         server {
             workingDirectory project.file('run')
-            arg "-mixin.config=mixins.nbexpand.json"
+            arg "-mixin.config=nbexpand.mixins.json"
+
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+
             property 'forge.logging.console.level', 'debug'
-            property 'mixin.env.disableRefMap', 'true'
+
             mods {
                 nbexpand {
                     source sourceSets.main
@@ -63,9 +60,13 @@ minecraft {
 
         data {
             workingDirectory project.file('run')
+
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+
             property 'forge.logging.console.level', 'debug'
-            args '--mod', 'nbexpand', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+
+            args '--mod', 'nbexpand', '--all', '--output', file('src/generated/resources/')
+
             mods {
                 nbexpand {
                     source sourceSets.main
@@ -75,37 +76,26 @@ minecraft {
     }
 }
 
-sourceSets.main.resources { srcDir 'src/generated/resources' }
-
 repositories {
-    maven { url 'https://repo.spongepowered.org/repository/maven-public/' }
+    maven { url = 'https://repo.repsy.io/mvn/gandiber/geckolib' }
+
+    maven { url = 'https://repo.spongepowered.org/maven/' }
+    maven { url = 'https://dist.creeper.host/Sponge/maven' }
+
     jcenter()
     mavenCentral()
-    maven { url "https://www.cursemaven.com" }
-    maven { url 'https://jitpack.io' }
-}
-
-configurations {
-    shade
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.16.4-35.1.12'
-    compile 'org.spongepowered:mixin:0.8'
-    compile fg.deobf('com.github.LudoCrypt:Forge-Extended-ASM:2.2')
-    shade 'com.github.LudoCrypt:Forge-Extended-ASM:2.2'
+    minecraft 'net.minecraftforge:forge:1.16.4-35.1.4'
+    implementation 'org.spongepowered:noise:2.0.0-SNAPSHOT'
+    compile 'org.spongepowered:mixin:0.8.1'
 }
 
 jar {
     manifest {
         attributes([
-                "Specification-Title"     : "nbexpand",
-                "Specification-Vendor"    : "nbexpandsareus",
-                "Specification-Version"   : "1",
-                "Implementation-Title"    : project.name,
-                "Implementation-Version"  : "${version}",
-                "Implementation-Vendor"   : "nbexpandsareus",
-                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+                "MixinConfigs": "nbexpand.mixins.json"
         ])
     }
 }
@@ -128,31 +118,5 @@ publishing {
 apply plugin: 'org.spongepowered.mixin'
 
 mixin {
-    add sourceSets.main, "refmap.nbexpand.json"
+    add sourceSets.main, "nbexpand.refmap.json"
 }
-
-minecraft {
-    accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
-}
-
-jar {
-    manifest {
-        attributes([
-                // Existing properties here
-                "MixinConfigs": "mixins.nbexpand.json,mixins.mm.json"
-        ])
-    }
-}
-
-shadowJar {
-    classifier = ''
-	exclude 'com/chocohead/mm/MM.class'
-    configurations = [project.configurations.shade]
-}
-
-reobf {
-    shadowJar {}
-}
-
-tasks.build.dependsOn reobfShadowJar
-jar.finalizedBy('reobfShadowJar')
